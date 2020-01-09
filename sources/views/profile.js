@@ -3,7 +3,6 @@ import {BASE_URL} from "../helpers/info";
 
 export default class ProfileView extends JetView {
 	config(){
-		const dateFormat = webix.Date.dateToStr("%d %M %Y");
 
 		const main_info = {
 			margin:10,
@@ -68,14 +67,14 @@ export default class ProfileView extends JetView {
 					click	:() => {
 						if (this.$$("form").validate()){
 
-							const component	= this.$$('form');
+							const component	= this.$$("form");
 
 							component.disable();
 							component.showProgress();
 
-							const form 	= this.$$('form').getValues();
+							const form 	= this.$$("form").getValues();
 
-							webix.ajax().post(BASE_URL+'/update', {
+							webix.ajax().post(BASE_URL+"/update", {
 								username	: form.uname,
 								name		: form.fname,
 								email 		: form.email,
@@ -93,7 +92,7 @@ export default class ProfileView extends JetView {
 										type	: "alert-error"
 									});
 								})
-								.then(data => {
+								.then(() => {
 									component.hideProgress();
 									component.enable();
 									component.focus();
@@ -102,7 +101,7 @@ export default class ProfileView extends JetView {
 										title	: "Success",
 										text	: "Your profile updated successfully",
 									});
-								})
+								});
 						}
 						else {
 							this.$$("form").focus();

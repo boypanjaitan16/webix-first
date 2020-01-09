@@ -1,25 +1,9 @@
-import {JetView, plugins} from "webix-jet";
-import {BASE_URL} from "../helpers/info";
+import {JetView} from "webix-jet";
 
 export default class TopView extends JetView{
 	config(){
 		const authService 	= this.app.getService("auth");
 		const detail		= authService.getUser();
-
-		const header = {
-			type:"header", css:"custom_dark", height:58,
-			template:"BOY PANJAITAN"
-		};
-
-		const sidebar = {
-			localId:"menu",
-			view:"sidebar", css:"webix_dark", width:250,
-			data:[
-				{ value:"Dashboard", id:"start", icon:"wxi-columns" },
-				{ value:"Data",		 id:"data",  icon:"wxi-pencil" },
-				{ value:"Profile",		 id:"forms",  icon:"wxi-pencil" }
-			]
-		};
 
 		const toolbar = {
 			view	: "toolbar",
@@ -63,15 +47,13 @@ export default class TopView extends JetView{
 							text: "Are you sure to proceed ?",
 							type:"confirm-error"
 						})
-							.then(function(result){
-								webix.message('Now logging out ...');
+							.then(function(){
+								webix.message("Now logging out ...");
 
 								authService.logout();
-								console.log('logout');
 							})
 							.fail(function(e){
-								console.log(e);
-								console.log('fail');
+								window.console.log(e);
 							});
 						//this.app.show("/top/profile");
 					}
@@ -84,8 +66,8 @@ export default class TopView extends JetView{
 				{ rows:
 					[ toolbar, {$subview:true}, {
 						height	: 60,
-						css		: 'app_start text_center',
-						template: 'Copyright 2020 &copy; <b>Boy Panjaitan</b>'
+						css		: "app_start text_center",
+						template: "Copyright 2020 &copy; <b>Boy Panjaitan</b>"
 					}]
 				},
 			]

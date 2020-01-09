@@ -60,7 +60,7 @@ export default class LoginView extends JetView {
 														text    : e.toString(),
 														type    : "alert-error"
 													})
-														.then(function(result){
+														.then(function(){
 															component.hideProgress();
 															component.enable();
 															component.focus();
@@ -73,7 +73,7 @@ export default class LoginView extends JetView {
 													text    : e.toString(),
 													type    : "alert-error"
 												})
-													.then(function(result){
+													.then(function(){
 														component.hideProgress();
 														component.enable();
 														component.focus();
@@ -93,12 +93,7 @@ export default class LoginView extends JetView {
 									name	: "register",
 									label	: "Register",
 									click	: () => {
-										try {
-											this.app.show("/register");
-										}
-										catch (e) {
-											console.log(e);
-										}
+										this.app.show("/register");
 									}
 								}
 							],
@@ -117,7 +112,7 @@ export default class LoginView extends JetView {
 		return ui;
 	}
 
-	init(view, url) {
+	init() {
 		webix.extend(this.$$("loginForm"), webix.ProgressBar);
 
 		/*

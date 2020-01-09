@@ -9,7 +9,7 @@ export default class SubmitView extends JetView{
 				{
 					rows: [
 						{ gravity: 1, template: "" },
-						{ view:"template", icon:'mdi mdi-download', template:"<i class='mdi mdi-download'></i> Facebook Video Downloader", type:"header" }, // 1st row
+						{ view:"template", icon:"mdi mdi-download", template:"<i class='mdi mdi-download'></i> Facebook Video Downloader", type:"header" }, // 1st row
 						{
 							view	:  "form",
 							gravity	: 1,
@@ -34,7 +34,7 @@ export default class SubmitView extends JetView{
 										const authService 	= this.app.getService("auth");
 										const detail		= authService.getUser();
 
-										if($$("video")){
+										if(this.$$("video")){
 											component.removeView("video");
 										}
 
@@ -45,7 +45,7 @@ export default class SubmitView extends JetView{
 											url		: values.url,
 										})
 											.catch(function (err) {
-												webix.alert({title:'Error', text:err, type:'alert-error'});
+												webix.alert({title:"Error", text:err, type:"alert-error"});
 											})
 											.then(function(data){
 												component.hideProgress();
@@ -56,7 +56,7 @@ export default class SubmitView extends JetView{
 												if(result.status === "success"){
 													if (Object.keys(result.data.download).length !== 0) {
 
-														webix.ajax().post(BASE_URL+'/log/create', {
+														webix.ajax().post(BASE_URL+"/log/create", {
 															url 		: values.url,
 															result		: result.data.download.sd,
 															username 	: detail.username,
@@ -67,22 +67,23 @@ export default class SubmitView extends JetView{
 															title	: "Video Found",
 															text	: result.data.title
 														})
-															.then(function (state) {
+															.then(function () {
 																component.addView({
-																	view: "video",
-																	id: "video",
-																	height: 350,
-																	src: [result.data.download.sd]
+																	tooltip	: "Right click on video to download",
+																	view	: "video",
+																	id		: "video",
+																	height	: 350,
+																	src		: [result.data.download.sd]
 																}, 2);
 															});
 													}
 													else {
-														webix.alert({title:'Failed', text:"Video not available", type:'alert-error'});
+														webix.alert({title:"Failed", text:"Video not available", type:"alert-error"});
 													}
 
 												}
 												else {
-													webix.alert({title:'Error', text:result.message, type:'alert-error'});
+													webix.alert({title:"Error", text:result.message, type:"alert-error"});
 												}
 											});
 									}
@@ -99,7 +100,7 @@ export default class SubmitView extends JetView{
 		return ui;
 	}
 
-	init(view, url) {
+	init() {
 		webix.extend(this.$$("submitForm"), webix.ProgressBar);
 	}
 }

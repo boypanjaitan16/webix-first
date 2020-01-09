@@ -5,7 +5,7 @@ export default class HistoryView extends JetView{
 	config(){
 		return {
 			view		: "datatable",
-			id			: 'table',
+			id			: "table",
 			autoConfig	: true,
 			scrollX		: true,
 			select		: true,
@@ -18,27 +18,27 @@ export default class HistoryView extends JetView{
 					})
 						.then(function(result){
 							webix.message("Now deleting ...");
-							webix.ajax().post(BASE_URL+'/log/delete', {
+							webix.ajax().post(BASE_URL+"/log/delete", {
 								id 	: cell.row
 							})
 								.catch(e => {
 									webix.alert({
-										title	: 'Error',
+										title	: "Error",
 										text	: e.toString(),
-										type	: 'alert-error'
+										type	: "alert-error"
 									});
 								})
 								.then(res => {
 									const result	= res.json();
 
-									if (result.status === 'success'){
-										$$('table').remove(cell);
+									if (result.status === "success"){
+										$$("table").remove(cell);
 									}
 									else {
 										webix.alert({
-											title	: 'Error',
+											title	: "Error",
 											text	: result.message,
-											type	: 'alert-error'
+											type	: "alert-error"
 										});
 									}
 								});
@@ -49,21 +49,21 @@ export default class HistoryView extends JetView{
 				}
 			},
 			columns	: [
-				{id:'id', header:'#', fillspace: true},
-				{id:'title', header:'Title', fillspace:2},
+				{id:"id", header:"#", fillspace: true},
+				{id:"title", header:"Title", fillspace:2},
 				{
-					id:'result', header:'Download Link',fillspace:true, template: obj => {
+					id:"result", header:"Download Link",fillspace:true, template: obj => {
 						return `<a target="_blank" class="btn" href="${obj.result}"><small>Visit Link</small> <i class="mdi mdi-open-in-new"></i> </a>`;
 					}
 				},
-				{id:'date', header: 'Date', fillspace:true},
+				{id:"date", header: "Date", fillspace:true},
 				{
-					id:'btn', header:{
-						css		: 'del_btn',
-						text	: 'Delete'
+					id:"btn", header:{
+						css		: "del_btn",
+						text	: "Delete"
 					},
 					template 	: obj => {
-						return '<i class="mdi mdi-trash-can ic_del_btn"></i>';
+						return "<i class=\"mdi mdi-trash-can ic_del_btn\"></i>";
 					}
 				}
 			]
@@ -94,26 +94,26 @@ export default class HistoryView extends JetView{
 		const authService 	= this.app.getService("auth");
 		const detail		= authService.getUser();
 
-		webix.ajax().post(BASE_URL+'/log', {
+		webix.ajax().post(BASE_URL+"/log", {
 			username 	: detail.username
 		})
 			.catch(e => {
 				webix.alert({
-					title	: 'Error',
+					title	: "Error",
 					text	: e.toString(),
-					type	: 'alert-error'
+					type	: "alert-error"
 				});
 			})
 			.then(result => {
 				const obj	= result.json();
 
-				if(obj.status === 'success') {
+				if(obj.status === "success") {
 					const data = new webix.DataCollection(
 						{
 							data	: obj.data,
 							schema	: {
 								$init	: function (object) {
-									object.Result	= 'link';
+									object.Result	= "link";
 								}
 							}
 						});
@@ -122,9 +122,9 @@ export default class HistoryView extends JetView{
 				}
 				else {
 					webix.alert({
-						title	: 'Error',
+						title	: "Error",
 						text	: obj.message,
-						type	: 'alert-error'
+						type	: "alert-error"
 					});
 				}
 			});

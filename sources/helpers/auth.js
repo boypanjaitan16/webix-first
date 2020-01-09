@@ -5,7 +5,6 @@ export function auth(app, view, config) {
 	const logout      	= config.logout || "/logout";
 	const afterLogin  	= config.afterLogin || "/top/submit"; //app.config.start;
 	const afterLogout 	= config.afterLogout || "/login";
-	const ping        	= config.ping || 5 * 60 * 1000;
 
 	let credentials 	= null;
 
@@ -38,7 +37,7 @@ export function auth(app, view, config) {
 						throw ("Login Failed");
 					}
 					app.show(afterLogin);
-			});
+				});
 		},
 
 		logout() {

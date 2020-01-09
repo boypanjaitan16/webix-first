@@ -1,17 +1,8 @@
 import {JetView} from "webix-jet";
-import * as Cookies from "js-cookie";
 import {BASE_URL} from "../helpers/info";
 
 export default class RegisterView extends JetView {
 	config() {
-		let values = webix.copy({
-			username    : "",
-			password    : "",
-			rememberme  : false
-		}, Cookies.getJSON("Crm"));
-
-		const authService = this.app.getService("auth");
-
 		let ui = {
 			cols: [
 				{ gravity:1, template:"" },
@@ -46,7 +37,7 @@ export default class RegisterView extends JetView {
 									label:"Email", labelPosition:"top",
 									invalidMessage:"Email is required",
 									placeholder:"Email",
-									type	: 'email'
+									type	: "email"
 								},
 								{
 									view:"text", name:"phone", label:"Phone Number", labelPosition:"top", placeholder:"Phone", type:"number"
@@ -84,7 +75,7 @@ export default class RegisterView extends JetView {
 
 											let values = this.$$("registerForm").getValues();
 
-											webix.ajax().post(BASE_URL+'/register', {
+											webix.ajax().post(BASE_URL+"/register", {
 												username	: values.uname,
 												name		: values.fname,
 												email		: values.email,
@@ -98,9 +89,9 @@ export default class RegisterView extends JetView {
 													component.focus();
 
 													webix.alert({
-														title	: 'Error',
+														title	: "Error",
 														text	: err.toString(),
-														type	: 'alert-error'
+														type	: "alert-error"
 													});
 												})
 												.then(function (data) {
@@ -110,21 +101,21 @@ export default class RegisterView extends JetView {
 
 													const result	= data.json();
 
-													if (result.status === 'success'){
+													if (result.status === "success"){
 														webix.alert({
 															title	: "Success",
-															text	: 'You can now login using your account credentials'
+															text	: "You can now login using your account credentials"
 														})
-															.then(function (state) {
+															.then(function () {
 																webix.message("Registration success", "success");
-																myapp.show('/login');
+																myapp.show("/login");
 															});
 													}
 													else {
 														webix.alert({
-															title	: 'Failed',
+															title	: "Failed",
 															text	: result.message,
-															type	: 'alert-error'
+															type	: "alert-error"
 														});
 													}
 												});
@@ -138,12 +129,12 @@ export default class RegisterView extends JetView {
 									height	: 20
 								},
 								{
-									template	: 'Already have account? <strong>Login</strong>',
-									view 		: 'button',
+									template	: "Already have account? <strong>Login</strong>",
+									view 		: "button",
 									autoheight	: true,
-									css			: 'no_border text_center',
+									css			: "no_border text_center",
 									click		: () => {
-										this.app.show('/login');
+										this.app.show("/login");
 									}
 								}
 							],
@@ -162,7 +153,7 @@ export default class RegisterView extends JetView {
 		return ui;
 	}
 
-	init(view, url) {
+	init() {
 		webix.extend(this.$$("registerForm"), webix.ProgressBar);
 	}
 }
