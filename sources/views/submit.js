@@ -3,6 +3,9 @@ import {BASE_URL} from "../helpers/info";
 
 export default class SubmitView extends JetView{
 	config() {
+		const authService 	= this.app.getService("auth");
+		const detail		= authService.getUser();
+
 		let ui = {
 			cols: [
 				{ gravity:1, template:"" },
@@ -23,7 +26,7 @@ export default class SubmitView extends JetView{
 									name        : "url",
 									labelPosition: "top",
 									required    : true,
-									placeholder : "Paste the video's link here"
+									placeholder : "Paste the link here"
 								},
 								{
 									view	:"button", value:"GO !", type:"form", autowidth:true, autoheight: true, css:"webix_primary",
@@ -61,7 +64,18 @@ export default class SubmitView extends JetView{
 															result		: result.data.download.sd,
 															username 	: detail.username,
 															title 		: result.data.title
-														});
+														})
+															.then(() => {
+																const badge		= detail.logs+1;
+
+																$$("ic_logs").define({
+																	badge	: badge
+																});
+																$$("ic_logs").refresh();
+
+																detail.logs		= badge;
+																authService.setUser(detail);
+															});
 
 														webix.alert({
 															title	: "Video Found",

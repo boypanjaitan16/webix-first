@@ -14,6 +14,10 @@ export function auth(app, view, config) {
 			return credentials;
 		},
 
+		setUser(data){
+			credentials	= data;
+		},
+
 		getStatus(server) {
 			if (!server) {
 				return credentials !== null;

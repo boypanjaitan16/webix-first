@@ -3,6 +3,10 @@ import {BASE_URL} from "../helpers/info";
 
 export default class HistoryView extends JetView{
 	config(){
+
+		const authService 	= this.app.getService("auth");
+		const detail		= authService.getUser();
+
 		return {
 			view		: "datatable",
 			id			: "table",
@@ -10,38 +14,50 @@ export default class HistoryView extends JetView{
 			scrollX		: true,
 			select		: true,
 			onClick:{
-				"ic_del_btn" : function  (event, cell, target) {
+				"ic_del_btn" : function  (event, cell) {
 					webix.confirm({
-						title: "Delete History",
-						text: "Are you sure to proceed ?",
-						type:"confirm-error"
+						title	: "Delete History",
+						text	: "Are you sure to proceed ?",
+						type	: "confirm-error"
 					})
 						.then(function(result){
-							webix.message("Now deleting ...");
-							webix.ajax().post(BASE_URL+"/log/delete", {
-								id 	: cell.row
-							})
-								.catch(e => {
-									webix.alert({
-										title	: "Error",
-										text	: e.toString(),
-										type	: "alert-error"
-									});
-								})
-								.then(res => {
-									const result	= res.json();
 
-									if (result.status === "success"){
-										$$("table").remove(cell);
-									}
-									else {
+							if(result) {
+								webix.message("Now deleting ...");
+								webix.ajax().post(BASE_URL + "/log/delete", {
+									id: cell.row
+								})
+									.catch(e => {
 										webix.alert({
-											title	: "Error",
-											text	: result.message,
-											type	: "alert-error"
+											title: "Error",
+											text: e.toString(),
+											type: "alert-error"
 										});
-									}
-								});
+									})
+									.then(res => {
+										const result = res.json();
+
+										if (result.status === "success") {
+											const badge		= detail.logs-1;
+
+											$$("table").remove(cell);
+											$$("ic_logs").define({
+												badge	: badge
+											});
+											$$("ic_logs").refresh();
+
+											detail.logs		= badge;
+											authService.setUser(detail);
+
+										} else {
+											webix.alert({
+												title: "Error",
+												text: result.message,
+												type: "alert-error"
+											});
+										}
+									});
+							}
 						})
 						.fail(function(){
 
@@ -62,7 +78,7 @@ export default class HistoryView extends JetView{
 						css		: "del_btn",
 						text	: "Delete"
 					},
-					template 	: obj => {
+					template 	: () => {
 						return "<i class=\"mdi mdi-trash-can ic_del_btn\"></i>";
 					}
 				}
@@ -90,6 +106,7 @@ export default class HistoryView extends JetView{
 			]
 		};*/
 	}
+
 	init(view){
 		const authService 	= this.app.getService("auth");
 		const detail		= authService.getUser();
@@ -108,6 +125,16 @@ export default class HistoryView extends JetView{
 				const obj	= result.json();
 
 				if(obj.status === "success") {
+					const badge		= obj.data.length;
+
+					$$("ic_logs").define({
+						badge	: badge
+					});
+					$$("ic_logs").refresh();
+
+					detail.logs		= badge;
+					authService.setUser(detail);
+
 					const data = new webix.DataCollection(
 						{
 							data	: obj.data,

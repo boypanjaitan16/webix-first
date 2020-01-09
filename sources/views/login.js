@@ -13,7 +13,7 @@ export default class LoginView extends JetView {
 						{
 							view	: "form",
 							gravity	: 1,
-							id		: "loginForm",
+							id		: "mainLoginForm",
 							width	: 500,
 							rules	:{
 								"username"	: webix.rules.isNotEmpty,
@@ -45,13 +45,13 @@ export default class LoginView extends JetView {
 									label   : "Login",
 									hotkey  : "enter",
 									click   : () => {
-										let component = this.$$("loginForm");
+										let component = this.$$("mainLoginForm");
 
 										if (component.validate()) {
 											component.disable();
 											component.showProgress();
 
-											let values = this.$$("loginForm").getValues();
+											let values = component.getValues();
 
 											try {
 												authService.login(values.username, values.password).catch(e => {
@@ -80,7 +80,7 @@ export default class LoginView extends JetView {
 													});
 											}
 										} else {
-											this.$$("loginForm").focus();
+											component.focus();
 										}
 									}
 								},
@@ -113,10 +113,10 @@ export default class LoginView extends JetView {
 	}
 
 	init() {
-		webix.extend(this.$$("loginForm"), webix.ProgressBar);
+		webix.extend(this.$$("mainLoginForm"), webix.ProgressBar);
 
 		/*
-		this.$$('loginForm').setValues({
+		this.$$('mainLoginForm').setValues({
 			username	: 'boypanjaitan16',
 			password	: 'mypass'
 		});

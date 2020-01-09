@@ -11,9 +11,9 @@ export default class TopView extends JetView{
 			height	: 58,
 			css		: "webix_dark",
 			cols:[
-				{ template: "Hai, <b>"+detail.name+"</b>", css:"app_start no_border" },
+				{ template: "Hi, <b>"+detail.name+"</b>", css:"app_start no_border" },
 				{
-					view:"icon", icon:"mdi mdi-book-multiple", click: () => {
+					view:"icon", id:"ic_logs", icon:"mdi mdi-book-multiple", badge:detail.logs.toString(),tooltip:"Video histories", click: () => {
 						this.app.show("/top/history");
 					}
 				},
@@ -22,17 +22,6 @@ export default class TopView extends JetView{
 						this.app.show("/top/submit");
 					}
 				},
-				/*{
-					view:"icon", icon:"mdi mdi-bell", badge:"5",tooltip:"Notifications",
-					click:() => {
-						webix.alert({
-							title: "Notifications",
-							text: "Your notifications will goes here"
-						}).then(function(result){
-							this.app.show('/login');
-						});
-					}
-				},*/
 				{
 					view:"icon", icon:"mdi mdi-settings", click: () => {
 						this.app.show("/top/profile");
