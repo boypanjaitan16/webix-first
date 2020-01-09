@@ -1,7 +1,10 @@
 Webix Jet App
 ===================
 
-Developed by Boy Panjaitan. This is my first project in Webix Jet
+Developed by Boy Panjaitan. This is my first project in Webix Jet.
+This project is about an app for downloading video from Facebook.
+Just paste the link, and you're ready to go. But first you need to register
+your account first ;)
 ### How to run
 
 - run ```npm install```
