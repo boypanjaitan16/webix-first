@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-# webix-test
-Just start using webix
-=======
-Webix Jet Demo App
+Webix Jet App
 ===================
 
-Developed by Boy Panjaitan
+Developed by Boy Panjaitan. This is my first project in Webix Jet
 ### How to run
 
 - run ```npm install```
@@ -33,4 +29,3 @@ After that you can copy the "codebase" folder to the production server
 ### License
 
 MIT
->>>>>>> init
