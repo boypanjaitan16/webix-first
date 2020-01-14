@@ -1,12 +1,13 @@
 Facebook Video Downloader - Webix Jet App
 ===================
-
-Developed by Boy Panjaitan. This is my first project in Webix Jet.
 This project is about an app for downloading video from Facebook.
 Just paste the link, and you're ready to go. But first you need to register
 your account, so we can trace your activity using this app ;)
 
 This app using [this project](https://github.com/boypanjaitan16/webix-ep) for API endpoints.
+
+###Demo
+Demo is available [here](http://boy-webix.s3-website-ap-southeast-1.amazonaws.com/login).
 
 ### How to run
 
