@@ -7,7 +7,7 @@ your account, so we can trace your activity using this app ;)
 This app using [this project](https://github.com/boypanjaitan16/webix-ep) for API endpoints.
 
 ### Demo
-Demo is available [here](http://boy-webix.s3-website-ap-southeast-1.amazonaws.com/login).
+Demo is available [here](http://boy-webix.s3-website-ap-southeast-1.amazonaws.com).
 
 ### How to run
 
