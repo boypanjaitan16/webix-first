@@ -5,17 +5,19 @@ export default class LoginView extends JetView {
 		const authService = this.app.getService("auth");
 
 		let ui = {
-			cols: [
-				{ gravity:1, template:"" },
+			view		: "layout", //optional line
+			responsive	: true,
+			cols		: [
+				{ gravity:1, template:""},
 				{
 					rows: [
 						{gravity: 1, template: ""},
 						{
-							view	: "form",
-							gravity	: 1,
-							id		: "mainLoginForm",
-							width	: 500,
-							rules	:{
+							view		: "form",
+							minWidth	: 250,
+							gravity		: 1,
+							id			: "mainLoginForm",
+							rules		:{
 								"username"	: webix.rules.isNotEmpty,
 								"password"	: webix.rules.isNotEmpty,
 							},
@@ -105,7 +107,7 @@ export default class LoginView extends JetView {
 						{gravity: 1, template: ""}
 					]
 				},
-				{ gravity:1, template:"" }
+				{ gravity:1, template:""}
 			]
 		};
 
@@ -115,11 +117,13 @@ export default class LoginView extends JetView {
 	init() {
 		webix.extend(this.$$("mainLoginForm"), webix.ProgressBar);
 
+
 		/*
-		this.$$('mainLoginForm').setValues({
-			username	: 'boypanjaitan16',
-			password	: 'mypass'
+		this.$$("mainLoginForm").setValues({
+			username	: "boypanjaitan16",
+			password	: "1234"
 		});
 		*/
+
 	}
 }

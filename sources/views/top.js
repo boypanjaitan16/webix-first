@@ -53,11 +53,12 @@ export default class TopView extends JetView{
 		return {
 			type:"clean", cols:[
 				{ rows:
-					[ toolbar, {$subview:true}, {
+					[ toolbar, {$subview:true},{
 						height	: 60,
+						paddingTop	: 20,
 						css		: "app_start text_center",
-						template: "Copyright 2020 &copy; <b>Boy Panjaitan</b>"
-					}]
+						template: "Copyright 2020 &copy; <b>Boy Panjaitan</b>"},
+					]
 				},
 			]
 		};

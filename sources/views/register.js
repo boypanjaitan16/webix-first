@@ -10,11 +10,12 @@ export default class RegisterView extends JetView {
 					rows: [
 						{gravity: 1, template: ""},
 						{
-							view	: "form",
-							gravity	: 1,
-							localId	: "registerForm",
-							width	: 600,
-							rules	:{
+							view		: "form",
+							gravity		: 1,
+							minWidth	: 250,
+							maxWidth	: 500,
+							localId		: "registerForm",
+							rules		: {
 								"fname"	: webix.rules.isNotEmpty,
 								"uname"	: webix.rules.isNotEmpty,
 								"email"	: webix.rules.isNotEmpty

@@ -112,16 +112,19 @@ export default class ProfileView extends JetView {
 		};
 
 		return {
-			view:"scrollview", scroll:"xy", body:{
+			view:"scrollview", scroll:"xy", responsive: true, body:{
 				type:"wide",
 				rows:[
 					{ template:"Profile information", type:"header", css:"text_center" },
 					{
-						view:"form", localId:"form", padding:24,
+						view	: "form",
+						localId	: "form",
 						cols	: [
 							{gravity: 1, template: ""},
 							{
-								width	: 700,
+								minWidth: 250,
+								maxWidth: 500,
+								gravity	: 2,
 								rows	:[
 									upper_section,
 									{height: 20},
@@ -147,12 +150,12 @@ export default class ProfileView extends JetView {
 
 		webix.extend(this.$$("form"), webix.ProgressBar);
 
-		this.$$("form").setValues({
+		/*this.$$("form").setValues({
 			uname	: detail.username,
 			fname	: detail.name,
 			email 	: detail.email,
 			phone	: detail.phone,
 			password: detail.password
-		});
+		});*/
 	}
 }

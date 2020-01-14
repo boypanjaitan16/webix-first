@@ -1,3 +1,12 @@
+.bg-black{
+    background-color: #0f5768;
+}
+.bg-red{
+    background-color: red;
+}
+.bg-blue{
+    background-color: blue;
+}
 .footer{
     display: table-cell;
     vertical-align: middle

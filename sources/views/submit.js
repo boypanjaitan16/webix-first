@@ -3,22 +3,22 @@ import {BASE_URL} from "../helpers/info";
 
 export default class SubmitView extends JetView{
 	config() {
-		const authService 	= this.app.getService("auth");
-		const detail		= authService.getUser();
-
 		let ui = {
+			view		: "layout", //optional line
+			responsive	: true,
 			cols: [
-				{ gravity:1, template:"" },
+				{ gravity:1, template:""},
 				{
+					gravity		: 2,
 					rows: [
 						{ gravity: 1, template: "" },
 						{ view:"template", icon:"mdi mdi-download", template:"<i class='mdi mdi-download'></i> Facebook Video Downloader", type:"header" }, // 1st row
 						{
-							view	:  "form",
-							gravity	: 1,
-							id		:    "submitForm",
-							width	: 800,
-							elements	:[
+							view		: "form",
+							id			: "submitForm",
+							minWidth	: 250,
+							maxWidth	: 500,
+							elements	: [
 								{
 									gravity		: 2,
 									view        : "text",
@@ -107,7 +107,7 @@ export default class SubmitView extends JetView{
 						{gravity: 1, template: ""}
 					]
 				},
-				{ gravity:1, template:"" }
+				{ gravity:1, template:""}
 			]
 		};
 
